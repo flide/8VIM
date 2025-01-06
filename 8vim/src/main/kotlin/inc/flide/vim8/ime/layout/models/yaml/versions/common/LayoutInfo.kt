@@ -14,8 +14,12 @@ data class LayoutInfo(
     companion object
 }
 
+fun LayoutInfo.isEmpty(): Boolean = description.isEmpty() && contact.isEmpty()
+
 @ExcludeFromJacocoGeneratedReport
 @optics
 data class Contact(val name: String = "", val email: String = "") {
     companion object
 }
+
+fun Contact.isEmpty(): Boolean = name.isEmpty() && email.isEmpty()

@@ -27,7 +27,7 @@ import inc.flide.vim8.ime.layout.models.CustomKeycode
 import inc.flide.vim8.ime.layout.models.FingerPosition
 import inc.flide.vim8.ime.layout.models.KeyboardAction
 import inc.flide.vim8.ime.layout.models.LayerLevel
-import inc.flide.vim8.ime.layout.models.LayerLevel.Companion.MovementSequences
+import inc.flide.vim8.ime.layout.models.LayerLevel.Companion.MovementSequencesByLayer
 import inc.flide.vim8.ime.layout.models.LayerLevel.Companion.VisibleLayers
 import inc.flide.vim8.ime.theme.ThemeManager
 import inc.flide.vim8.ime.theme.blendARGB
@@ -352,7 +352,7 @@ class KeyboardControllerSpec : FunSpec({
                 ROTATION_MOVEMENT_SEQUENCES
             ) { rotationSequence ->
                 val layerMovement =
-                    MovementSequences.getOrDefault(layer, emptyList())
+                    MovementSequencesByLayer.getOrDefault(layer, emptyList())
 
                 val layerLevels = listOf(
                     LayerLevel.FIRST,

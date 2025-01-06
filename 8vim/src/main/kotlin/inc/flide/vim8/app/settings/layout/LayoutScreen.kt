@@ -1,4 +1,4 @@
-package inc.flide.vim8.app.settings
+package inc.flide.vim8.app.settings.layout
 
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -11,6 +11,8 @@ import androidx.compose.ui.platform.LocalContext
 import arrow.core.None
 import arrow.core.some
 import inc.flide.vim8.R
+import inc.flide.vim8.app.LocalNavController
+import inc.flide.vim8.app.Routes
 import inc.flide.vim8.app.availableLayouts
 import inc.flide.vim8.appPreferenceModel
 import inc.flide.vim8.datastore.ui.Preference
@@ -22,6 +24,7 @@ import inc.flide.vim8.ime.layout.models.error.ExceptionWrapperError
 import inc.flide.vim8.ime.layout.models.error.LayoutError
 import inc.flide.vim8.layoutLoader
 import inc.flide.vim8.lib.compose.Dialog
+import inc.flide.vim8.lib.compose.LocalKeyboardDatabaseController
 import inc.flide.vim8.lib.compose.Screen
 import inc.flide.vim8.lib.compose.stringRes
 import inc.flide.vim8.lib.util.DialogsHelper.showAlert
@@ -34,6 +37,8 @@ fun LayoutScreen() = Screen {
     title = stringRes(R.string.settings__layouts__title)
     previewFieldVisible = true
 
+    val navController = LocalNavController.current
+    val keyboardDatabaseController = LocalKeyboardDatabaseController.current
     val fileSelector = fileSelector()
 
     content {
@@ -67,6 +72,20 @@ fun LayoutScreen() = Screen {
                 }
             )
         }
+        Preference(
+            iconId = R.drawable.ic_keyboard,
+            title = stringRes(
+                R.string.settings__layouts__usages__title,
+                "layout" to keyboardDatabaseController.layoutName()
+            ),
+            onClick = { navController.navigate(Routes.Settings.LAYOUT_USAGES) },
+            trailing = {
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = null
+                )
+            }
+        )
     }
 }
 

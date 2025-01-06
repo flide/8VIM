@@ -83,6 +83,9 @@
     <string name="settings__layouts__load_custom__summary">Layout file from the device memory
         will be loaded. Please note this is experimental and might not work.</string>
 
+    <string name="settings__layouts__usages__title">Usages of {layout}</string>
+    <string name="settings__layouts__usage__title">Usage of {action}</string>
+
     <string name="settings__clipboard__title" comment="Title of Clipboard screen">Clipboard</string>
     <string name="settings__keyboard__title" comment="Title of Keyboard screen">Keyboard</string>
 
@@ -185,4 +188,40 @@
     <string name="dialog__confirm__title">Confirm</string>
     <string name="resetting_settings__description">The settings will be reset to their default value. All custom layouts and clipboard history  will be lost.</string>
     <string name="settings__backup_and_restore__reset">Settings have been reset</string>
+
+    <string name="xpad__help__option__all">All layers</string>
+    <string name="layer_level__functions">Functions</string>
+    <string name="layer_level__hidden">Hidden</string>
+    <string name="layer_level__first">Default</string>
+    <string name="layer_level__second">First extra layer</string>
+    <string name="layer_level__third">Second extra layer</string>
+    <string name="layer_level__fourth">Third extra layer</string>
+    <string name="layer_level__fifth">Fourth extra layer</string>
+    <string name="layer_level__sixth">Fifth extra layer</string>
+    <string name="finger_position__no_touch">Finger not touching the screen</string>
+    <string name="finger_position__inside_circle">Circle</string>
+    <string name="finger_position__top">Top</string>
+    <string name="finger_position__left">Left</string>
+    <string name="finger_position__bottom">Bottom</string>
+    <string name="finger_position__right">Right</string>
+    <string name="finger_position__long_press">No movement for at least 500ms</string>
+    <string name="finger_position__long_press_end">Finger lift from screen after no movements > 500ms</string>
+    <string name="custom_key_code__move_current_end_point_left">Move cursor to the left</string>
+    <string name="custom_key_code__move_current_end_point_right">Move cursor to the right</string>
+    <string name="custom_key_code__move_current_end_point_up">Move cursor to up</string>
+    <string name="custom_key_code__move_current_end_point_down">Move cursor to down</string>
+    <string name="custom_key_code__selection_start">Start selection</string>
+    <string name="custom_key_code__select_all">Select all</string>
+    <string name="custom_key_code__toggle_selection_anchor">Toggle anchor</string>
+    <string name="custom_key_code__shift_toggle">Toggle shift</string>
+    <string name="custom_key_code__switch_to_main_keypad">Switch to Xpad</string>
+    <string name="custom_key_code__switch_to_number_keypad">Switch to the number keypad</string>
+    <string name="custom_key_code__switch_to_symbols_keypad">Switch to the symbols keypad</string>
+    <string name="custom_key_code__switch_to_selection_keypad">Switch to the selection keypad</string>
+    <string name="custom_key_code__switch_to_emoticon_keyboard">Switch to the emoticon keyboard</string>
+    <string name="custom_key_code__hide_keyboard">Hide keyboard</string>
+    <string name="custom_key_code__no_operation">No operation</string>
+    <string name="custom_key_code__switch_to_clippad_keyboard">Switch to the clipboard view</string>
+    <string name="custom_key_code__ctrl_toggle">Toggle CTRL</string>
+    <string name="custom_key_code__fn_toggle">Toggle FN</string>
 </resources>

@@ -1,5 +1,4 @@
 name: Matrix notification release
-run-name: Matrix notification release ${{inputs.version}} to ${{inputs.channel}}
 
 on:
   workflow_dispatch:
@@ -100,5 +99,7 @@ jobs:
     uses: ./.github/workflows/matrix-notify.yaml
     needs: [msg]
     with:
-      message: ${{needs.msg.outputs.text}}
+      message: |
+        New release: ${{github.event.release.name}}
+        ${{github.event.release.html_url}}
     secrets: inherit

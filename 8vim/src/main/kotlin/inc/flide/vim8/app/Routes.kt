@@ -10,11 +10,16 @@ import inc.flide.vim8.app.settings.ClipboardScreen
 import inc.flide.vim8.app.settings.GestureScreen
 import inc.flide.vim8.app.settings.HomeScreen
 import inc.flide.vim8.app.settings.KeyboardScreen
-import inc.flide.vim8.app.settings.LayoutScreen
 import inc.flide.vim8.app.settings.ThemeScreen
 import inc.flide.vim8.app.settings.about.AboutScreen
 import inc.flide.vim8.app.settings.about.ThirdPartyLicencesScreen
+import inc.flide.vim8.app.settings.layout.LayoutScreen
+import inc.flide.vim8.app.settings.layout.UsageScreen
+import inc.flide.vim8.app.settings.layout.UsagesScreen
 import inc.flide.vim8.app.setup.SetupScreen
+import inc.flide.vim8.lib.compose.ActionMapDatabase
+import inc.flide.vim8.lib.compose.KeyboardDatabaseController
+import inc.flide.vim8.lib.kotlin.curlyFormat
 
 object Routes {
     object Setup {
@@ -24,6 +29,10 @@ object Routes {
     object Settings {
         const val HOME = "settings"
         const val LAYOUTS = "settings/layouts"
+        const val LAYOUT_USAGES = "settings/layouts/usages"
+        const val LAYOUT_USAGE = "settings/layouts/usages/{id}"
+        fun layoutUsage(item: ActionMapDatabase.Item) = LAYOUT_USAGE.curlyFormat("id" to item.index)
+
         const val KEYBOARD = "settings/keyboard"
         const val CLIPBOARD = "settings/clipboard"
         const val THEME = "settings/theme"
@@ -34,7 +43,12 @@ object Routes {
     }
 
     @Composable
-    fun AppNavHost(modifier: Modifier, navController: NavHostController, startDestination: String) {
+    fun AppNavHost(
+        modifier: Modifier,
+        navController: NavHostController,
+        keyboardDatabaseController: KeyboardDatabaseController,
+        startDestination: String
+    ) {
         NavHost(
             modifier = modifier,
             navController = navController,
@@ -44,6 +58,13 @@ object Routes {
 
             composable(Settings.HOME) { HomeScreen() }
             composable(Settings.LAYOUTS) { LayoutScreen() }
+            composable(Settings.LAYOUT_USAGES) { UsagesScreen() }
+            composable(Settings.LAYOUT_USAGE) { navBackStack ->
+                val id = navBackStack.arguments?.getString("id")?.let { id ->
+                    keyboardDatabaseController.byId(id)
+                }
+                UsageScreen(id)
+            }
             composable(Settings.KEYBOARD) { KeyboardScreen() }
             composable(Settings.CLIPBOARD) { ClipboardScreen() }
             composable(Settings.THEME) { ThemeScreen() }

@@ -19,3 +19,8 @@ data class ExceptionWrapperError(val exception: Throwable) : LayoutError {
     override val message: String
         get() = exception.message ?: ""
 }
+
+data class UnknownVersion(val version: String) : LayoutError {
+    override val message: String
+        get() = "Unknown version: $version"
+}

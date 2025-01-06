@@ -28,10 +28,12 @@ import inc.flide.vim8.datastore.model.observeAsState
 import inc.flide.vim8.ime.layout.AvailableLayouts
 import inc.flide.vim8.layoutLoader
 import inc.flide.vim8.lib.compose.AppTheme
+import inc.flide.vim8.lib.compose.LocalKeyboardDatabaseController
 import inc.flide.vim8.lib.compose.LocalPreviewFieldController
 import inc.flide.vim8.lib.compose.PreviewKeyboardField
 import inc.flide.vim8.lib.compose.ProvideLocalizedResources
 import inc.flide.vim8.lib.compose.SystemUiApp
+import inc.flide.vim8.lib.compose.rememberKeyboardDatabaseController
 import inc.flide.vim8.lib.compose.rememberPreviewFieldController
 import java.lang.ref.WeakReference
 
@@ -40,6 +42,7 @@ val LocalNavController = staticCompositionLocalOf<NavController> {
 }
 
 var availableLayouts: WeakReference<AvailableLayouts?> = WeakReference(null)
+
 class MainActivity : ComponentActivity() {
     private val prefs by appPreferenceModel()
     private var resourcesContext by mutableStateOf(this as Context)
@@ -72,6 +75,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun AppContent() {
+        val keyboardDatabaseController = rememberKeyboardDatabaseController()
         val navController = rememberNavController()
         val previewFieldController = rememberPreviewFieldController()
         val isImeSetUp by prefs.internal.isImeSetup.observeAsState()
@@ -81,7 +85,9 @@ class MainActivity : ComponentActivity() {
         if (availableLayouts.get() == null) {
             availableLayouts = WeakReference(AvailableLayouts(layoutLoader, context))
         }
+
         CompositionLocalProvider(
+            LocalKeyboardDatabaseController provides keyboardDatabaseController,
             LocalNavController provides navController,
             LocalPreviewFieldController provides previewFieldController
         ) {
@@ -94,6 +100,7 @@ class MainActivity : ComponentActivity() {
                 Routes.AppNavHost(
                     modifier = Modifier.weight(1.0f),
                     navController = navController,
+                    keyboardDatabaseController = keyboardDatabaseController,
                     startDestination = if (isImeSetUp) Routes.Settings.HOME else Routes.Setup.SCREEN
                 )
                 PreviewKeyboardField(previewFieldController)

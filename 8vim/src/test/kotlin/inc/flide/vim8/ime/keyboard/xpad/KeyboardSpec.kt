@@ -13,8 +13,6 @@ import inc.flide.vim8.ime.layout.models.LayerLevel
 import inc.flide.vim8.ime.layout.models.MovementSequenceType
 import inc.flide.vim8.ime.layout.models.characterSets
 import inc.flide.vim8.ime.layout.models.findLayer
-import inc.flide.vim8.ime.layout.models.yaml.versions.common.ExtraLayer
-import inc.flide.vim8.ime.layout.models.yaml.versions.common.toLayerLevel
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.floats.plusOrMinus
@@ -54,13 +52,12 @@ class KeyboardSpec : FunSpec() {
         context("find layer") {
             every { keyboardData.findLayer(any()) } returns LayerLevel.HIDDEN
             val movementSequences =
-                (
-                    ExtraLayer.MOVEMENT_SEQUENCES
-                        .map { (layer, sequence) -> sequence to layer.toLayerLevel() } + (
-                        emptyList<FingerPosition>() to LayerLevel.HIDDEN
-                        )
-                    )
-                    .map { (sequence, layer) -> (sequence + FingerPosition.NO_TOUCH) to layer }
+                LayerLevel.MovementSequencesByLayer
+                    .filter { (layer, _) ->
+                        layer == LayerLevel.HIDDEN ||
+                            layer.toInt() >= LayerLevel.SECOND.toInt()
+                    }
+                    .map { (layer, sequence) -> (sequence + FingerPosition.NO_TOUCH) to layer }
             withData(
                 nameFn = { "${it.first} -> ${it.second}" },
                 movementSequences

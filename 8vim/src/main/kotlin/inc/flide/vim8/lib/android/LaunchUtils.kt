@@ -10,12 +10,13 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 import kotlin.reflect.KClass
 
-fun Context.launchUrl(url: String) {
+fun Context.launchUrl(url: String, intentModifier: (Intent) -> Unit = { }) {
     val intent = Intent().also {
         it.action = Intent.ACTION_VIEW
         it.data = Uri.parse(url)
     }
     try {
+        intentModifier(intent)
         this.startActivity(intent)
     } catch (e: ActivityNotFoundException) {
         Toast.makeText(
@@ -25,7 +26,6 @@ fun Context.launchUrl(url: String) {
         ).show()
     }
 }
-
 inline fun <T : Any> Context.launchActivity(
     kClass: KClass<T>,
     intentModifier: (Intent) -> Unit = { }

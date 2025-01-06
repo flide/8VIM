@@ -35,6 +35,7 @@ import inc.flide.vim8.ime.layout.models.yaml.versions.common.Layer
 import inc.flide.vim8.ime.layout.models.yaml.versions.common.isEmpty
 import inc.flide.vim8.ime.layout.models.yaml.versions.common.keyCode
 import inc.flide.vim8.ime.layout.models.yaml.versions.common.toLayerLevel
+import inc.flide.vim8.ime.layout.models.yaml.versions.version21.Layout
 import inc.flide.vim8.ime.layout.parsers.LayoutParser
 import java.io.IOException
 import java.io.InputStream
@@ -76,7 +77,7 @@ class YamlParser : LayoutParser {
 
     override fun readKeyboardData(inputStream: InputStream?): Either<LayoutError, KeyboardData> {
         return catch({
-            mapper.readTree(inputStream).loadYaml(schema, mapper)
+            mapper.readTree(inputStream).loadYaml<Layout>(schema, mapper)
                 .map { layout ->
                     val keyboardData = KeyboardData(
                         info = layout.info,

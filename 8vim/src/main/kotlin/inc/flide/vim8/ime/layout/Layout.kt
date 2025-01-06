@@ -54,6 +54,7 @@ interface Layout<T> {
     fun inputStream(context: Context): Either<LayoutError, InputStream>
     fun md5(context: Context): Option<String>
     fun defaultName(context: Context): String
+    fun isEmbedded(): Boolean
 }
 
 fun safeLoadKeyboardData(layoutLoader: LayoutLoader, context: Context): KeyboardData? {
@@ -153,6 +154,8 @@ data class EmbeddedLayout(override val path: String) : Layout<String> {
         return Locale.forLanguageTag(path).getDisplayName(locale)
             .replaceFirstChar { it.titlecase(locale) }
     }
+
+    override fun isEmbedded(): Boolean = true
 }
 
 data class CustomLayout(override val path: Uri) : Layout<Uri> {
@@ -194,4 +197,6 @@ data class CustomLayout(override val path: Uri) : Layout<Uri> {
                 }
             }
     }.flatten().getOrElse { "" }
+
+    override fun isEmbedded(): Boolean = false
 }
