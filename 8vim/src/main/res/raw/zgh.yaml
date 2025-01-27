@@ -1,0 +1,60 @@
+version: "2"
+layers:
+  default:
+    sectors:
+      right:
+        parts:
+          bottom:
+            - lower_case: ⵉ
+            - lower_case: ⴳ
+            - lower_case: ⵇ
+            - lower_case: ⵀ
+              upper_case: ","
+          top:
+            - lower_case: ⴰ
+            - lower_case: ⴼ
+            - lower_case: ⴹ
+            - lower_case: ⵅ
+              upper_case: "."
+      top:
+        parts:
+          right:
+            - lower_case: ⵏ
+            - lower_case: ⵖ
+            - lower_case: ⵢ
+            - lower_case: ⵄ
+              upper_case: "?"
+          left:
+            - lower_case: ⵎ
+            - lower_case: ⴷ
+            - lower_case: ⵡ
+            - lower_case: ⵊ
+              upper_case: "!"
+      left:
+        parts:
+          top:
+            - lower_case: ⵜ
+            - lower_case: ⵍ
+            - lower_case: ⵛ
+            - lower_case: ⵥ
+              upper_case: "-"
+          bottom:
+            - lower_case: ⵔ
+            - lower_case: ⵣ
+            - lower_case: ⴻ
+            - lower_case: ⵯ
+              upper_case: "'"
+      bottom:
+        parts:
+          left:
+            - lower_case: ⵓ
+            - lower_case: ⴽ
+            - lower_case: ⵃ
+            - lower_case: ⵚ
+              upper_case: "_"
+          right:
+            - lower_case: ⵙ
+            - lower_case: ⴱ
+            - lower_case: ⵕ
+            - lower_case: ⵟ
+              upper_case: "@"
